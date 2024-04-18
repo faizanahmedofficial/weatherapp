@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeController _themeController = Get.put(ThemeController());
 
-    return  GetMaterialApp(
+    return GetMaterialApp(
       home: const InternetConnectionWrapper(child: HomeScreen()),
       title: "Weather",
       theme: ThemeData.light(),
@@ -26,17 +26,21 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class InternetConnectionWrapper extends StatefulWidget {
   final Widget child;
 
-  const InternetConnectionWrapper({Key? key, required this.child}) : super(key: key);
+  const InternetConnectionWrapper({Key? key, required this.child})
+      : super(key: key);
 
   @override
-  _InternetConnectionWrapperState createState() => _InternetConnectionWrapperState();
+  _InternetConnectionWrapperState createState() =>
+      _InternetConnectionWrapperState();
 }
 
 class _InternetConnectionWrapperState extends State<InternetConnectionWrapper> {
-  late InternetConnectionStatus _connectionStatus = InternetConnectionStatus.disconnected;
+  late InternetConnectionStatus _connectionStatus =
+      InternetConnectionStatus.disconnected;
 
   @override
   void initState() {
@@ -62,16 +66,18 @@ class _InternetConnectionWrapperState extends State<InternetConnectionWrapper> {
         body: Center(
           child: AlertDialog(
             title: Text('No Internet Connection'),
-            content: Text('Please check your internet connection and try again.'),
+            content:
+                Text('Please check your internet connection and try again.'),
             actions: [
-              _connectionStatus == InternetConnectionStatus.connected ?
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(),
-                child: Text('OK'),
-              ) : TextButton(
-                onPressed: (){},
-                child: Text('OK'),
-              ),
+              _connectionStatus == InternetConnectionStatus.connected
+                  ? TextButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      child: Text('OK'),
+                    )
+                  : TextButton(
+                      onPressed: () {},
+                      child: Text('OK'),
+                    ),
             ],
           ),
         ),
